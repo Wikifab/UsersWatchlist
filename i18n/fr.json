@@ -1,0 +1,33 @@
+{
+    "@metadata": {
+        "authors": [
+            "Pierre Boutet"
+        ]
+    },
+	"followlist": "Utilisateurs suivis",
+	"followlisttools-view": "Modifications des utilisateurs suivis",
+	"followlisttools-edit": "Voir et modifier la liste des utilisateurs suivis",
+	"followlisttools-raw": "Modifier la liste des utilisateurs suivis en mode brut",
+	"followlisttools-clear": "Vider la liste des utilisateurs suivis",
+	"followlistedit-normal-title": "Modifier la liste des utilisateurs suivis",
+	"followlistfor2": "Pour $1 $2",
+	"followlistedit-normal-legend": "Retirer des utilisateurs de la liste de suivi",
+	"followlistedit-normal-explain": "Les utilisateurs de votre liste de suivi sont visibles ci-dessous.\nPour enlever un utilisateur de la liste, cochez la case à côté puis cliquez sur le bouton « {{int:Followlistedit-normal-submit}} ».\nVous pouvez aussi [[Special:EditFollowlist/raw|modifier la liste en mode brut]].",
+	"followlistedit-normal-submit": "Retirer les titres sélectionnés",
+	"followlistedit-raw-title": "Modifier la liste de suivi en mode brut",
+	"followlistedit-raw-legend": "Modification de la liste de suivi en mode brut",
+	"followlistedit-raw-explain": "Les utilisateurs de votre liste de suivi sont affichés ci-dessous et peuvent être modifiés en les ajoutant ou les retirant de la liste (un utilisateur par ligne).\nLorsque vous avez fini, cliquez sur le bouton « {{int:Followlistedit-raw-submit}} » en bas.\nVous pouvez aussi [[Special:EditFollowlist|utiliser l'éditeur normal]].",
+	"followlistedit-raw-titles": "Titres :",
+	"followlistedit-raw-submit": "Mettre à jour la liste des utilisateurs suivis",
+	"followlistedit-raw-done": "Votre liste des utilisateurs suivis a été mise à jour.",
+	"followlistedit-raw-added": "{{PLURAL:$1|Un utilisateur a été ajouté|$1 utilisateurs ont été ajoutés}} :",
+	"followlistedit-raw-removed": "{{PLURAL:$1|Un utilisateur a été retiré|$1 utilisateurs ont été retirés}} :",
+	"followlistedit-clear-title": "Liste d'utilisateurs suivi vidée",
+	"followlistedit-clear-legend": "Effacer la liste d'utilisateurs suivi",
+	"followlistedit-clear-explain": "Tous les utilisateurs seront supprimés de votre liste de suivi",
+	"followlistedit-clear-titles": "Titres :",
+	"followlistedit-clear-submit": "Effacer la liste de suivi (ceci est permanent !)",
+	"followlistedit-clear-done": "Votre liste d'utilisateurs suivis a été effacée.",
+	"followlistedit-clear-removed": "{{PLURAL:$1|Un utilisateur a été|$1 utilisateurs ont été}} retirés :",
+	"followlistedit-too-many": "Il y a trop de pages à afficher ici."
+}
