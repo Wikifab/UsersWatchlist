@@ -162,24 +162,23 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 			return array();
 		}
 
-		$titles = array();
+		$users = array();
 
 		foreach ( $list as $text ) {
 			$text = trim( $text );
 			if ( strlen( $text ) > 0 ) {
+				$user = User::newFromName($text);
 				$title = Title::newFromText( $text );
-				if ( $title instanceof Title && $title->isWatchable() ) {
-					$titles[] = $title;
+				if ( $user && $user->getId() != 0 ) {
+					$users[] = $user;
 				}
 			}
 		}
 
-		GenderCache::singleton()->doTitlesArray( $titles );
-
 		$list = array();
 		/** @var Title $title */
-		foreach ( $titles as $title ) {
-			$list[] = $title->getPrefixedText();
+		foreach ( $users as $user ) {
+			$list[] = $user->getName();
 		}
 
 		return array_unique( $list );
