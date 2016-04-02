@@ -1,7 +1,7 @@
-UserFollowList
+Description
 ===============
 
-Add a tab when viewing a user page to "follow this user", and a separate user-FollowList special page which lists the latest contributions from users on the list.
+This MediaWiki extension add a tab when viewing a user page to "follow this user", and a separate 'FollowList' special page which lists the latest contributions from users on the list.
 
 Installation
 ===============
@@ -15,3 +15,12 @@ Usage
 ===============
 
 Go to the special page 'Special:Followlist'
+
+Example
+===============
+Coming soon on http://en.wikifab.org
+
+
+MediaWiki Versions
+===============
+Version 0.1 of this extension has been tested on MediaWiki version 1.24
