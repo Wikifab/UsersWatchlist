@@ -1,0 +1,6 @@
+{
+    "name": "wikifab/extensions-user-followlist",
+    "type": "mediawiki-extension",
+    "require": {
+    }
+}
