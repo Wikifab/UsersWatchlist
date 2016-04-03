@@ -5,6 +5,7 @@
         ]
     },
 	"followlist": "Utilisateurs suivis",
+	"followlistanontext": "Veuillez vous connecter pour visualiser ou modifier les éléments de votre liste de suivi.",
 	"followlisttools-view": "Modifications des utilisateurs suivis",
 	"followlisttools-edit": "Voir et modifier la liste des utilisateurs suivis",
 	"followlisttools-raw": "Modifier la liste des utilisateurs suivis en mode brut",

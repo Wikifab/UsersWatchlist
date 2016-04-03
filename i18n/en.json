@@ -5,6 +5,7 @@
         ]
     },
 	"followlist": "Users watchlist",
+	"followlistanontext": "Please log in to view or edit items on your watchlist.",
 	"followlisttools-view": "View relevant users watchlist",
 	"followlisttools-edit": "View and edit users watchlist",
 	"followlisttools-raw": "Edit raw users watchlist",
