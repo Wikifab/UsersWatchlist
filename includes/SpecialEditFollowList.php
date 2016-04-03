@@ -163,6 +163,7 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 		}
 
 		$users = array();
+		
 
 		foreach ( $list as $text ) {
 			$text = trim( $text );
@@ -311,8 +312,8 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 			__METHOD__
 		);
 
+		$users = array();
 		if ( $res->numRows() > 0 ) {
-			$users = array();
 			foreach ( $res as $row ) {
 				$users[] = User::whoIs( $row->fl_user_followed  );
 			}
