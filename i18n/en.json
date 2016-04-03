@@ -1,0 +1,33 @@
+{
+    "@metadata": {
+        "authors": [
+            "Clément Flipo"
+        ]
+    },
+	"followlist": "Users watchlist",
+	"followlisttools-view": "View relevant users watchlist",
+	"followlisttools-edit": "View and edit users watchlist",
+	"followlisttools-raw": "Edit raw users watchlist",
+	"followlisttools-clear": "Clear the users watchlist",
+	"followlistedit-normal-title": "Edit users watchlist",
+	"followlistfor2": "For $1 $2",
+	"followlistedit-normal-legend": "Remove users from users watchlist",
+	"followlistedit-normal-explain": "Users on your watchlist are shown below.\nTo remove a user, check the box next to it, and click \"{{int:Followlistedit-normal-submit}}\".\nYou can also [[Special:EditFollowlist/raw|edit the raw list]].",
+	"followlistedit-normal-submit": "Remove users",
+	"followlistedit-raw-title": "Edit raw users watchlist",
+	"followlistedit-raw-legend": "listedit-raw-legend",
+	"followlistedit-raw-explain": "Users on your users watchlist are shown below, and can be edited by adding to and removing from the list;\none title per line.\nWhen finished, click \"{{int:Followlistedit-raw-submit}}\".\nYou can also [[Special:EditFollowlist|use the standard editor]].",
+	"followlistedit-raw-titles": "Users:",
+	"followlistedit-raw-submit": "Update users watchlist",
+	"followlistedit-raw-done": "Your users watchlist has been updated.",
+	"followlistedit-raw-added": "{{PLURAL:$1|1 user was|$1 users were}} added:",
+	"followlistedit-raw-removed": "{{PLURAL:$1|1 user was|$1 users were}} removed:",
+	"followlistedit-clear-title": "Cleared followed users list",
+	"followlistedit-clear-legend": "Clear followed users list",
+	"followlistedit-clear-explain": "All of the users will be removed from your followed users list",
+	"followlistedit-clear-titles": "Users:",
+	"followlistedit-clear-submit": "Clear the users watchlist (This is permanent!)",
+	"followlistedit-clear-done": "Your users watchlist has been cleared.",
+	"followlistedit-clear-removed": "{{PLURAL:$1|1 user was|$1 users were}} removed:",
+	"followlistedit-too-many": "There are too many pages to display here."
+}
