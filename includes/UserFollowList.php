@@ -17,4 +17,17 @@ class UserFollowList {
 				__DIR__ . '/tables.sql' );
 		return true;
 	}
+
+	/**
+	 * @param User $user
+	 * @param array $defaultPreferences
+	 */
+	static function getPreferences( $user,  &$defaultPreferences ) {
+
+		$defaultPreferences['followlist-allow'] = array(
+				'type' => 'toggle',
+				'section' => 'watchlist/userwatchlist',
+				'label-message' => 'tog-followlist-allow',
+		);
+	}
 }

@@ -6,12 +6,13 @@ $wgAutoloadClasses['SpecialFollowlist'] = __DIR__ . "/includes/SpecialFollowlist
 $wgAutoloadClasses['SpecialEditFollowList'] = __DIR__ . "/includes/SpecialEditFollowList.php";
 
 $wgHooks['LoadExtensionSchemaUpdates'][] = 'UserFollowList::onLoadExtensionSchemaUpdates';
+$wgHooks['GetPreferences'][] = 'UserFollowList::getPreferences';
 
 $wgExtensionCredits['specialpage'][] = array(
 		'path' => __FILE__,
 		'name' => 'FollowList',
 		'author' => 'Pierre Boutet',
-		//'url' => 'https://www.mediawiki.org/wiki/Extension:WfExplore',
+		'description' => "View and edit users follow list.",
 		'descriptionmsg' => 'followlist-desc',
 		'version' => '0.1.0',
 );
@@ -23,3 +24,4 @@ $wgSpecialPages['EditFollowList'] = 'SpecialEditFollowList'; # Tell MediaWiki ab
 
 //default permissions :
 $wgGroupPermissions['*']['editmyfollowlist'] = true;
+

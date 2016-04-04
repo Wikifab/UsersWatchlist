@@ -23,6 +23,7 @@
 	"followlistedit-raw-done": "Your users watchlist has been updated.",
 	"followlistedit-raw-added": "{{PLURAL:$1|1 user was|$1 users were}} added:",
 	"followlistedit-raw-removed": "{{PLURAL:$1|1 user was|$1 users were}} removed:",
+	"followlistedit-raw-failed": "{{PLURAL:$1|1 user can't|$1 users can't}} be added:",
 	"followlistedit-clear-title": "Cleared followed users list",
 	"followlistedit-clear-legend": "Clear followed users list",
 	"followlistedit-clear-explain": "All of the users will be removed from your followed users list",
@@ -30,5 +31,7 @@
 	"followlistedit-clear-submit": "Clear the users watchlist (This is permanent!)",
 	"followlistedit-clear-done": "Your users watchlist has been cleared.",
 	"followlistedit-clear-removed": "{{PLURAL:$1|1 user was|$1 users were}} removed:",
-	"followlistedit-too-many": "There are too many pages to display here."
+	"followlistedit-too-many": "There are too many pages to display here.",
+	"prefs-userwatchlist": "watchlist per users",
+	"tog-followlist-allow": "Allow other users to add me to their users watchlist"
 }

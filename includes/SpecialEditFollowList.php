@@ -61,7 +61,7 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 
 		# Anons don't get a followlist
 		$this->requireLogin( 'followlistanontext' );
-		
+
 
 		$out = $this->getOutput();
 
@@ -163,7 +163,7 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 		}
 
 		$users = array();
-		
+
 
 		foreach ( $list as $text ) {
 			$text = trim( $text );
@@ -192,7 +192,8 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 		if ( count( $wanted ) > 0 ) {
 			$toFollow = array_diff( $wanted, $current );
 			$toUnfollow = array_diff( $current, $wanted );
-			$this->followUsers( $toFollow );
+			$followedUsers = $this->followUsers( $toFollow );
+			$failsUsers = array_diff( $toFollow, $followedUsers );
 			$this->unfollowUsers( $toUnfollow );
 			$this->getUser()->invalidateCache();
 
@@ -201,11 +202,15 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 			} else {
 				return false;
 			}
-
-			if ( count( $toFollow ) > 0 ) {
+			if ( count( $followedUsers ) > 0 ) {
 				$this->successMessage .= ' ' . $this->msg( 'followlistedit-raw-added' )
-					->numParams( count( $toFollow ) )->parse();
-				$this->showTitles( $toFollow, $this->successMessage );
+					->numParams( count( $followedUsers ) )->parse();
+				$this->showTitles( $followedUsers, $this->successMessage );
+			}
+			if ( count( $failsUsers ) > 0 ) {
+				$this->successMessage .= ' ' . $this->msg( 'followlistedit-raw-failed' )
+					->numParams( count( $failsUsers ) )->parse();
+				$this->showTitles( $failsUsers, $this->successMessage );
 			}
 
 			if ( count( $toUnfollow ) > 0 ) {
@@ -338,11 +343,11 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 			array( 'fl_user_followed', 'user_name', 'user_id' ),
 			array( 'fl_user' => $this->getUser()->getId() ),
 			__METHOD__,
-			array( 
+			array(
 				 'user_properties' => array( 'INNER JOIN', array(
-					'fl_user_followed=user_id' 
+					'fl_user_followed=user_id'
 				 ) ),
-				'ORDER BY' => array( 'user_name' ) 
+				'ORDER BY' => array( 'user_name' )
 			)
 		);
 
@@ -353,38 +358,10 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 			}
 			$res->free();
 		}
-		
+
 		return $users;
 	}
 
-	/**
-	 * Validates followlist entry
-	 *
-	 * @param Title $title
-	 * @param int $namespace
-	 * @param string $dbKey
-	 * @return bool Whether this item is valid
-	 */
-	private function checkTitle( $title, $namespace, $dbKey ) {
-		if ( $title
-			&& ( $title->isExternal()
-				|| $title->getNamespace() < 0
-			)
-		) {
-			$title = false; // unrecoverable
-		}
-
-		if ( !$title
-			|| $title->getNamespace() != $namespace
-			|| $title->getDBkey() != $dbKey
-		) {
-			$this->badItems[] = array( $title, $namespace, $dbKey );
-		}
-
-		return (bool)$title;
-	}
-
-	//TODO : implement this
 	/**
 	 * Attempts to clean up broken items
 	 */
@@ -430,6 +407,15 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 	}
 
 	/**
+	 * return true if user allow to be followed
+	 * @param User $user
+	 */
+	private function isCanBeFollowed(User $user) {
+
+		return $user->getBoolOption( 'followlist-allow' );
+	}
+
+	/**
 	 * Add a list of users to a user's followlist
 	 *
 	 * $users can be an array of strings of User Object;
@@ -440,20 +426,25 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 		$dbw = wfGetDB( DB_MASTER );
 		$rows = array();
 
+		$followedUsers = array();
+
 		foreach ( $users as $user ) {
+			$inputUser = $user;
 			if ( !$user instanceof User ) {
 				$user = User::newFromName($user);
 			}
 
-			if ( $user instanceof User ) {
+			if ( $user instanceof User && $this->isCanBeFollowed($user) ) {
 				$rows[] = array(
 					'fl_user' => $this->getUser()->getId(),
 					'fl_user_followed' => $user->getId()
 				);
+				$followedUsers[] = $inputUser;
 			}
 		}
 
 		$dbw->insert( 'followlist', $rows, __METHOD__, 'IGNORE' );
+		return $followedUsers;
 	}
 
 	/**
@@ -536,7 +527,7 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 					'section' => "user",
 			);
 		}
-		
+
 		$this->cleanupFollowlist();
 
 		$context = new DerivativeContext( $this->getContext() );
