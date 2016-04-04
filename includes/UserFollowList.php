@@ -11,7 +11,7 @@ class UserFollowList {
 
 
 	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater ) {
-	
+
 		var_dump('onLoadExtensionSchemaUpdates');
 		$updater->addExtensionTable( 'followlist',
 				__DIR__ . '/tables.sql' );
@@ -24,10 +24,15 @@ class UserFollowList {
 	 */
 	static function getPreferences( $user,  &$defaultPreferences ) {
 
-		$defaultPreferences['followlist-allow'] = array(
-				'type' => 'toggle',
-				'section' => 'watchlist/userwatchlist',
-				'label-message' => 'tog-followlist-allow',
-		);
+		global $wgUserFollowListAllowAll;
+
+		if( ! $wgUserFollowListAllowAll) {
+
+			$defaultPreferences['followlist-allow'] = array(
+					'type' => 'toggle',
+					'section' => 'watchlist/userwatchlist',
+					'label-message' => 'tog-followlist-allow',
+			);
+		}
 	}
 }

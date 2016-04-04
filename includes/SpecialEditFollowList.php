@@ -412,6 +412,10 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 	 */
 	private function isCanBeFollowed(User $user) {
 
+		global $wgUserFollowListAllowAll;
+		if ($wgUserFollowListAllowAll) {
+			return true;
+		}
 		return $user->getBoolOption( 'followlist-allow' );
 	}
 

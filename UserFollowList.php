@@ -25,3 +25,6 @@ $wgSpecialPages['EditFollowList'] = 'SpecialEditFollowList'; # Tell MediaWiki ab
 //default permissions :
 $wgGroupPermissions['*']['editmyfollowlist'] = true;
 
+
+// To hide opt-in in preference and allow all user to be followed :
+//$wgUserFollowListAllowAll = true;
