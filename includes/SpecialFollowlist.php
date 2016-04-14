@@ -28,7 +28,7 @@
  * @ingroup SpecialPage
  */
 class SpecialFollowlist extends ChangesListSpecialPage {
-	public function __construct( $page = 'Followlist', $restriction = 'viewmywatchlist' ) {
+	public function __construct( $page = 'FollowList', $restriction = 'viewmywatchlist' ) {
 		parent::__construct( $page, $restriction );
 	}
 
