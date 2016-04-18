@@ -509,7 +509,7 @@ class SpecialFollowlist extends ChangesListSpecialPage {
 			array( 'id' => 'mw-watchlist-options' )
 		);
 
-		$form .= SpecialRecentChanges::makeLegend( $this->getContext() );
+		$form .= parent::makeLegend();
 
 		$this->getOutput()->addHTML( $form );
 	}
