@@ -134,9 +134,10 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 	 *
 	 * @param string $search Prefix to search for
 	 * @param int $limit Maximum number of results to return
+	 * @param int $offset Number of results to skip
 	 * @return string[] Matching subpages
 	 */
-	public function prefixSearchSubpages( $search, $limit = 10 ) {
+	public function prefixSearchSubpages( $search, $limit, $offset ) {
 		return self::prefixSearchArray(
 			$search,
 			$limit,
@@ -145,7 +146,8 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 			array(
 				'clear',
 				'raw',
-			)
+			),
+			$offset
 		);
 	}
 
