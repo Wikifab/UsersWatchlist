@@ -1,10 +1,10 @@
 <?php
 /**
- * @defgroup Followlist Users followlist handling
+ * @defgroup UsersWatchList Users userswatchlist handling
  */
 
 /**
- * Implements Special:Followlist
+ * Implements Special:UsersWatchList
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,18 +23,18 @@
  *
  * @file
  * @ingroup SpecialPage
- * @ingroup Followlist
+ * @ingroup UsersWatchList
  */
 
 /**
  * Provides the UI through which users can perform editing
- * operations on their followlist
+ * operations on their userswatchlist
  *
  * @ingroup SpecialPage
- * @ingroup Followlist
+ * @ingroup UsersWatchList
  * @author Rob Church <robchur@gmail.com>
  */
-class SpecialEditFollowList extends UnlistedSpecialPage {
+class SpecialEditUsersWatchList extends UnlistedSpecialPage {
 	/**
 	 * Editing modes. EDIT_CLEAR is no longer used; the "Clear" link scared people
 	 * too much. Now it's passed on to the raw editor, from which it's very easy to clear.
@@ -48,7 +48,7 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 	private $badItems = array();
 
 	public function __construct() {
-		parent::__construct( 'EditFollowList', 'editmyfollowlist' );
+		parent::__construct( 'EditUsersWatchList', 'editmyuserswatchlist' );
 	}
 
 	/**
@@ -59,8 +59,8 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 	public function execute( $mode ) {
 		$this->setHeaders();
 
-		# Anons don't get a followlist
-		$this->requireLogin( 'followlistanontext' );
+		# Anons don't get a userswatchlist
+		$this->requireLogin( 'userswatchlistanontext' );
 
 
 		$out = $this->getOutput();
@@ -83,49 +83,49 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 
 		switch ( $mode ) {
 			case self::EDIT_RAW:
-				$out->setPageTitle( $this->msg( 'followlistedit-raw-title' ) );
+				$out->setPageTitle( $this->msg( 'userswatchlistedit-raw-title' ) );
 				$form = $this->getRawForm();
 				if ( $form->show() ) {
 					$out->addHTML( $this->successMessage );
-					$out->addReturnTo( SpecialPage::getTitleFor( 'Followlist' ) );
+					$out->addReturnTo( SpecialPage::getTitleFor( 'UsersWatchList' ) );
 				}
 				break;
 			case self::EDIT_CLEAR:
-				$out->setPageTitle( $this->msg( 'followlistedit-clear-title' ) );
+				$out->setPageTitle( $this->msg( 'userswatchlistedit-clear-title' ) );
 				$form = $this->getClearForm();
 				if ( $form->show() ) {
 					$out->addHTML( $this->successMessage );
-					$out->addReturnTo( SpecialPage::getTitleFor( 'Followlist' ) );
+					$out->addReturnTo( SpecialPage::getTitleFor( 'UsersWatchList' ) );
 				}
 				break;
 
 			case self::EDIT_NORMAL:
 			default:
-			$this->executeViewEditFollowlist();
+			$this->executeViewEditUsersWatchList();
 				break;
 		}
 	}
 
 	/**
-	 * Renders a subheader on the followlist page.
+	 * Renders a subheader on the userswatchlist page.
 	 */
 	protected function outputSubtitle() {
 		$out = $this->getOutput();
-		$out->addSubtitle( $this->msg( 'followlistfor2', $this->getUser()->getName() )
-			->rawParams( SpecialEditFollowlist::buildTools( null ) ) );
+		$out->addSubtitle( $this->msg( 'userswatchlistfor2', $this->getUser()->getName() )
+			->rawParams( SpecialEditUsersWatchList::buildTools( null ) ) );
 	}
 
 	/**
-	 * Executes an edit mode for the followlist view, from which you can manage your followlist
+	 * Executes an edit mode for the userswatchlist view, from which you can manage your userswatchlist
 	 *
 	 */
-	protected function executeViewEditFollowlist() {
+	protected function executeViewEditUsersWatchList() {
 		$out = $this->getOutput();
-		$out->setPageTitle( $this->msg( 'followlistedit-normal-title' ) );
+		$out->setPageTitle( $this->msg( 'userswatchlistedit-normal-title' ) );
 		$form = $this->getNormalForm();
 		if ( $form->show() ) {
 			$out->addHTML( $this->successMessage );
-			$out->addReturnTo( SpecialPage::getTitleFor( 'Followlist' ) );
+			$out->addReturnTo( SpecialPage::getTitleFor( 'UsersWatchList' ) );
 		}
 	}
 
@@ -141,7 +141,7 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 		return self::prefixSearchArray(
 			$search,
 			$limit,
-			// SpecialFollowlist uses SpecialEditFollowlist::getMode, so new types should be added
+			// SpecialUsersWatchList uses SpecialEditUsersWatchList::getMode, so new types should be added
 			// here and there - no 'edit' here, because that the default for this page
 			array(
 				'clear',
@@ -189,7 +189,7 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 
 	public function submitRaw( $data ) {
 		$wanted = $this->extractTitles( $data['Titles'] );
-		$current = $this->getFollowlist();
+		$current = $this->getUsersWatchList();
 
 		if ( count( $wanted ) > 0 ) {
 			$toFollow = array_diff( $wanted, $current );
@@ -200,37 +200,37 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 			$this->getUser()->invalidateCache();
 
 			if ( count( $toFollow ) > 0 || count( $toUnfollow ) > 0 ) {
-				$this->successMessage = $this->msg( 'followlistedit-raw-done' )->parse();
+				$this->successMessage = $this->msg( 'userswatchlistedit-raw-done' )->parse();
 			} else {
 				return false;
 			}
 			if ( count( $followedUsers ) > 0 ) {
-				$this->successMessage .= ' ' . $this->msg( 'followlistedit-raw-added' )
+				$this->successMessage .= ' ' . $this->msg( 'userswatchlistedit-raw-added' )
 					->numParams( count( $followedUsers ) )->parse();
 				$this->showTitles( $followedUsers, $this->successMessage );
 			}
 			if ( count( $failsUsers ) > 0 ) {
-				$this->successMessage .= ' ' . $this->msg( 'followlistedit-raw-failed' )
+				$this->successMessage .= ' ' . $this->msg( 'userswatchlistedit-raw-failed' )
 					->numParams( count( $failsUsers ) )->parse();
 				$this->showTitles( $failsUsers, $this->successMessage );
 			}
 
 			if ( count( $toUnfollow ) > 0 ) {
-				$this->successMessage .= ' ' . $this->msg( 'followlistedit-raw-removed' )
+				$this->successMessage .= ' ' . $this->msg( 'userswatchlistedit-raw-removed' )
 					->numParams( count( $toUnfollow ) )->parse();
 				$this->showTitles( $toUnfollow, $this->successMessage );
 			}
 		} else {
-			$this->clearFollowlist();
+			$this->clearUsersWatchList();
 			$this->getUser()->invalidateCache();
 
 			if ( count( $current ) > 0 ) {
-				$this->successMessage = $this->msg( 'followlistedit-raw-done' )->parse();
+				$this->successMessage = $this->msg( 'userswatchlistedit-raw-done' )->parse();
 			} else {
 				return false;
 			}
 
-			$this->successMessage .= ' ' . $this->msg( 'followlistedit-raw-removed' )
+			$this->successMessage .= ' ' . $this->msg( 'userswatchlistedit-raw-removed' )
 				->numParams( count( $current ) )->parse();
 			$this->showTitles( $current, $this->successMessage );
 		}
@@ -239,11 +239,11 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 	}
 
 	public function submitClear( $data ) {
-		$current = $this->getFollowlist();
-		$this->clearFollowlist();
+		$current = $this->getUsersWatchList();
+		$this->clearUsersWatchList();
 		$this->getUser()->invalidateCache();
-		$this->successMessage = $this->msg( 'followlistedit-clear-done' )->parse();
-		$this->successMessage .= ' ' . $this->msg( 'followlistedit-clear-removed' )
+		$this->successMessage = $this->msg( 'userswatchlistedit-clear-done' )->parse();
+		$this->successMessage .= ' ' . $this->msg( 'userswatchlistedit-clear-removed' )
 			->numParams( count( $current ) )->parse();
 		$this->showTitles( $current, $this->successMessage );
 
@@ -264,7 +264,7 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 		// Do a batch existence check
 		$batch = new LinkBatch();
 		if ( count( $titles ) >= 100 ) {
-			$output = wfMessage( 'followlistedit-too-many' )->parse();
+			$output = wfMessage( 'userswatchlistedit-too-many' )->parse();
 			return;
 		}
 		foreach ( $titles as $title ) {
@@ -300,17 +300,17 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 	}
 
 	/**
-	 * Prepare a list of titles on a user's followlist (excluding talk pages)
+	 * Prepare a list of titles on a user's userswatchlist (excluding talk pages)
 	 * and return an array of (prefixed) strings
 	 *
 	 * @return array
 	 */
-	private function getFollowlist() {
+	private function getUsersWatchList() {
 		$list = array();
 		$dbr = wfGetDB( DB_MASTER );
 
 		$res = $dbr->select(
-			'followlist',
+			'userswatchlist',
 			array(
 				'fl_user_followed'
 			), array(
@@ -326,22 +326,22 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 			}
 			$res->free();
 		}
-		$this->cleanupFollowlist();
+		$this->cleanupUsersWatchList();
 
 		return $users;
 	}
 
 	/**
-	 * Get a list of titles on a user's followlist
+	 * Get a list of titles on a user's userswatchlist
 	 *
 	 * @return array
 	 */
-	protected function getFollowlistInfo() {
+	protected function getUsersWatchListInfo() {
 		$users = array();
 		$dbr = wfGetDB( DB_MASTER );
 
 		$res = $dbr->select(
-			array( 'followlist', 'user' ),
+			array( 'userswatchlist', 'user' ),
 			array( 'fl_user_followed', 'user_name', 'user_id' ),
 			array( 'fl_user' => $this->getUser()->getId() ),
 			__METHOD__,
@@ -367,7 +367,7 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 	/**
 	 * Attempts to clean up broken items
 	 */
-	private function cleanupFollowlist() {
+	private function cleanupUsersWatchList() {
 		if ( !count( $this->badItems ) ) {
 			return; //nothing to do
 		}
@@ -378,9 +378,9 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 		foreach ( $this->badItems as $row ) {
 			list( $title, $namespace, $dbKey ) = $row;
 			$action = $title ? 'cleaning up' : 'deleting';
-			wfDebug( "User {$user->getName()} has broken followlist item ns($namespace):$dbKey, $action.\n" );
+			wfDebug( "User {$user->getName()} has broken userswatchlist item ns($namespace):$dbKey, $action.\n" );
 
-			$dbw->delete( 'followlist',
+			$dbw->delete( 'userswatchlist',
 				array(
 					'wl_user' => $user->getId(),
 					'wl_namespace' => $namespace,
@@ -397,12 +397,12 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 	}
 
 	/**
-	 * Remove all titles from a user's followlist
+	 * Remove all titles from a user's userswatchlist
 	 */
-	private function clearFollowlist() {
+	private function clearUsersWatchList() {
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->delete(
-			'followlist',
+			'userswatchlist',
 			array( 'fl_user' => $this->getUser()->getId() ),
 			__METHOD__
 		);
@@ -414,15 +414,15 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 	 */
 	private function isCanBeFollowed(User $user) {
 
-		global $wgUserFollowListAllowAll;
-		if ($wgUserFollowListAllowAll) {
+		global $wgUsersWatchListAllowAll;
+		if ($wgUsersWatchListAllowAll) {
 			return true;
 		}
-		return $user->getBoolOption( 'followlist-allow' );
+		return $user->getBoolOption( 'userswatchlist-allow' );
 	}
 
 	/**
-	 * Add a list of users to a user's followlist
+	 * Add a list of users to a user's userswatchlist
 	 *
 	 * $users can be an array of strings of User Object;
 	 *
@@ -449,12 +449,12 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 			}
 		}
 
-		$dbw->insert( 'followlist', $rows, __METHOD__, 'IGNORE' );
+		$dbw->insert( 'userswatchlist', $rows, __METHOD__, 'IGNORE' );
 		return $followedUsers;
 	}
 
 	/**
-	 * Remove a list of titles from a user's followlist
+	 * Remove a list of titles from a user's userswatchlist
 	 *
 	 * $titles can be an array of strings or User objects; the former
 	 * is preferred, since User are very memory-heavy
@@ -471,7 +471,7 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 
 			if ( $user instanceof User ) {
 				$dbw->delete(
-					'followlist',
+					'userswatchlist',
 					array(
 						'fl_user' => $this->getUser()->getId(),
 						'fl_user_followed' => $user->getId()
@@ -491,7 +491,7 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 		}
 
 		if ( count( $removed ) > 0 ) {
-			$this->successMessage = $this->msg( 'followlistedit-normal-done'
+			$this->successMessage = $this->msg( 'userswatchlistedit-normal-done'
 			)->numParams( count( $removed ) )->parse();
 			$this->showTitles( $removed, $this->successMessage );
 
@@ -502,7 +502,7 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 	}
 
 	/**
-	 * Get the standard followlist editing form
+	 * Get the standard userswatchlist editing form
 	 *
 	 * @return HTMLForm
 	 */
@@ -514,37 +514,37 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 
 		// Allow subscribers to manipulate the list of followed pages (or use it
 		// to preload lots of details at once)
-		$followlistInfo = $this->getFollowlistInfo();
+		$userswatchlistInfo = $this->getUsersWatchListInfo();
 		wfRunHooks(
-			'FollowlistEditorBeforeFormRender',
-			array( &$followlistInfo )
+			'UsersWatchListEditorBeforeFormRender',
+			array( &$userswatchlistInfo )
 		);
 
 		$options = array();
-		foreach ( $followlistInfo as $user ) {
+		foreach ( $userswatchlistInfo as $user ) {
 			$text = $this->buildRemoveLine( $user );
 			$options[$text] = $user->getName();
 			$count++;
 		}
 		if ( count( $options ) > 0 ) {
 			$fields['TitlesNs'] = array(
-					'class' => 'EditFollowlistCheckboxSeriesField',
+					'class' => 'EditUsersWatchListCheckboxSeriesField',
 					'options' => $options,
 					'section' => "user",
 			);
 		}
 
-		$this->cleanupFollowlist();
+		$this->cleanupUsersWatchList();
 
 		$context = new DerivativeContext( $this->getContext() );
 		$context->setTitle( $this->getPageTitle() ); // Remove subpage
-		$form = new EditFollowlistNormalHTMLForm( $fields, $context );
-		$form->setSubmitTextMsg( 'followlistedit-normal-submit' );
+		$form = new EditUsersWatchListNormalHTMLForm( $fields, $context );
+		$form->setSubmitTextMsg( 'userswatchlistedit-normal-submit' );
 		# Used message keys:
-		# 'accesskey-followlistedit-normal-submit', 'tooltip-followlistedit-normal-submit'
-		$form->setSubmitTooltip( 'followlistedit-normal-submit' );
-		$form->setWrapperLegendMsg( 'followlistedit-normal-legend' );
-		$form->addHeaderText( $this->msg( 'followlistedit-normal-explain' )->parse() );
+		# 'accesskey-userswatchlistedit-normal-submit', 'tooltip-userswatchlistedit-normal-submit'
+		$form->setSubmitTooltip( 'userswatchlistedit-normal-submit' );
+		$form->setWrapperLegendMsg( 'userswatchlistedit-normal-legend' );
+		$form->addHeaderText( $this->msg( 'userswatchlistedit-normal-explain' )->parse() );
 		$form->setSubmitCallback( array( $this, 'submitNormal' ) );
 
 		return $form;
@@ -564,34 +564,34 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 	}
 
 	/**
-	 * Get a form for editing the followlist in "raw" mode
+	 * Get a form for editing the userswatchlist in "raw" mode
 	 *
 	 * @return HTMLForm
 	 */
 	protected function getRawForm() {
-		$titles = implode( $this->getFollowlist(), "\n" );
+		$titles = implode( $this->getUsersWatchList(), "\n" );
 		$fields = array(
 			'Titles' => array(
 				'type' => 'textarea',
-				'label-message' => 'followlistedit-raw-titles',
+				'label-message' => 'userswatchlistedit-raw-titles',
 				'default' => $titles,
 			),
 		);
 		$context = new DerivativeContext( $this->getContext() );
 		$context->setTitle( $this->getPageTitle( 'raw' ) ); // Reset subpage
 		$form = new HTMLForm( $fields, $context );
-		$form->setSubmitTextMsg( 'followlistedit-raw-submit' );
-		# Used message keys: 'accesskey-followlistedit-raw-submit', 'tooltip-followlistedit-raw-submit'
-		$form->setSubmitTooltip( 'followlistedit-raw-submit' );
-		$form->setWrapperLegendMsg( 'followlistedit-raw-legend' );
-		$form->addHeaderText( $this->msg( 'followlistedit-raw-explain' )->parse() );
+		$form->setSubmitTextMsg( 'userswatchlistedit-raw-submit' );
+		# Used message keys: 'accesskey-userswatchlistedit-raw-submit', 'tooltip-userswatchlistedit-raw-submit'
+		$form->setSubmitTooltip( 'userswatchlistedit-raw-submit' );
+		$form->setWrapperLegendMsg( 'userswatchlistedit-raw-legend' );
+		$form->addHeaderText( $this->msg( 'userswatchlistedit-raw-explain' )->parse() );
 		$form->setSubmitCallback( array( $this, 'submitRaw' ) );
 
 		return $form;
 	}
 
 	/**
-	 * Get a form for clearing the followlist
+	 * Get a form for clearing the userswatchlist
 	 *
 	 * @return HTMLForm
 	 */
@@ -599,18 +599,18 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 		$context = new DerivativeContext( $this->getContext() );
 		$context->setTitle( $this->getPageTitle( 'clear' ) ); // Reset subpage
 		$form = new HTMLForm( array(), $context );
-		$form->setSubmitTextMsg( 'followlistedit-clear-submit' );
-		# Used message keys: 'accesskey-followlistedit-clear-submit', 'tooltip-followlistedit-clear-submit'
-		$form->setSubmitTooltip( 'followlistedit-clear-submit' );
-		$form->setWrapperLegendMsg( 'followlistedit-clear-legend' );
-		$form->addHeaderText( $this->msg( 'followlistedit-clear-explain' )->parse() );
+		$form->setSubmitTextMsg( 'userswatchlistedit-clear-submit' );
+		# Used message keys: 'accesskey-userswatchlistedit-clear-submit', 'tooltip-userswatchlistedit-clear-submit'
+		$form->setSubmitTooltip( 'userswatchlistedit-clear-submit' );
+		$form->setWrapperLegendMsg( 'userswatchlistedit-clear-legend' );
+		$form->addHeaderText( $this->msg( 'userswatchlistedit-clear-explain' )->parse() );
 		$form->setSubmitCallback( array( $this, 'submitClear' ) );
 
 		return $form;
 	}
 
 	/**
-	 * Determine whether we are editing the followlist, and if so, what
+	 * Determine whether we are editing the userswatchlist, and if so, what
 	 * kind of editing operation
 	 *
 	 * @param WebRequest $request
@@ -637,7 +637,7 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 
 	/**
 	 * Build a set of links for convenient navigation
-	 * between followlist viewing and editing modes
+	 * between userswatchlist viewing and editing modes
 	 *
 	 * @param null $unused
 	 * @return string
@@ -647,17 +647,17 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 
 		$tools = array();
 		$modes = array(
-			'view' => array( 'Followlist', false ),
-			'edit' => array( 'EditFollowlist', false ),
-			'raw' => array( 'EditFollowlist', 'raw' ),
-			'clear' => array( 'EditFollowlist', 'clear' ),
+			'view' => array( 'UsersWatchList', false ),
+			'edit' => array( 'EditUsersWatchList', false ),
+			'raw' => array( 'EditUsersWatchList', 'raw' ),
+			'clear' => array( 'EditUsersWatchList', 'clear' ),
 		);
 
 		foreach ( $modes as $mode => $arr ) {
-			// can use messages 'followlisttools-view', 'followlisttools-edit', 'followlisttools-raw'
+			// can use messages 'userswatchlisttools-view', 'userswatchlisttools-edit', 'userswatchlisttools-raw'
 			$tools[] = Linker::linkKnown(
 				SpecialPage::getTitleFor( $arr[0], $arr[1] ),
-				wfMessage( "followlisttools-{$mode}" )->escaped()
+				wfMessage( "userswatchlisttools-{$mode}" )->escaped()
 			);
 		}
 
@@ -672,7 +672,7 @@ class SpecialEditFollowList extends UnlistedSpecialPage {
 /**
  * Extend HTMLForm purely so we can have a more sane way of getting the section headers
  */
-class EditFollowlistNormalHTMLForm extends HTMLForm {
+class EditUsersWatchListNormalHTMLForm extends HTMLForm {
 	public function getLegend( $namespace ) {
 		$namespace = substr( $namespace, 2 );
 
@@ -682,15 +682,15 @@ class EditFollowlistNormalHTMLForm extends HTMLForm {
 	}
 
 	public function getBody() {
-		return $this->displaySection( $this->mFieldTree, '', 'editfollowlist-' );
+		return $this->displaySection( $this->mFieldTree, '', 'edituserswatchlist-' );
 	}
 }
 
-class EditFollowlistCheckboxSeriesField extends HTMLMultiSelectField {
+class EditUsersWatchListCheckboxSeriesField extends HTMLMultiSelectField {
 	/**
 	 * HTMLMultiSelectField throws validation errors if we get input data
 	 * that doesn't match the data set in the form setup. This causes
-	 * problems if something gets removed from the followlist while the
+	 * problems if something gets removed from the userswatchlist while the
 	 * form is open (bug 32126), but we know that invalid items will
 	 * be harmless so we can override it here.
 	 *

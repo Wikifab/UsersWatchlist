@@ -1,6 +1,6 @@
 <?php
 /**
- * Implements Special:Followlist
+ * Implements Special:UsersWatchList
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,8 +27,8 @@
  *
  * @ingroup SpecialPage
  */
-class SpecialFollowlist extends ChangesListSpecialPage {
-	public function __construct( $page = 'FollowList', $restriction = 'viewmywatchlist' ) {
+class SpecialUsersWatchList extends ChangesListSpecialPage {
+	public function __construct( $page = 'UsersWatchList', $restriction = 'viewmywatchlist' ) {
 		parent::__construct( $page, $restriction );
 	}
 
@@ -38,8 +38,8 @@ class SpecialFollowlist extends ChangesListSpecialPage {
 	 * @param string $subpage
 	 */
 	function execute( $subpage ) {
-		// Anons don't get a followlist
-		$this->requireLogin( 'followlistanontext' );
+		// Anons don't get a userswatchlist
+		$this->requireLogin( 'userswatchlistanontext' );
 
 		$output = $this->getOutput();
 		$request = $this->getRequest();
@@ -47,11 +47,11 @@ class SpecialFollowlist extends ChangesListSpecialPage {
 		$mode = SpecialEditWatchlist::getMode( $request, $subpage );
 		if ( $mode !== false ) {
 			if ( $mode === SpecialEditWatchlist::EDIT_RAW ) {
-				$title = SpecialPage::getTitleFor( 'EditFollowlist', 'raw' );
+				$title = SpecialPage::getTitleFor( 'EditUsersWatchList', 'raw' );
 			} elseif ( $mode === SpecialEditWatchlist::EDIT_CLEAR ) {
-				$title = SpecialPage::getTitleFor( 'EditFollowlist', 'clear' );
+				$title = SpecialPage::getTitleFor( 'EditUsersWatchList', 'clear' );
 			} else {
-				$title = SpecialPage::getTitleFor( 'EditFollowlist' );
+				$title = SpecialPage::getTitleFor( 'EditUsersWatchList' );
 			}
 
 			$output->redirect( $title->getLocalURL() );
@@ -194,14 +194,14 @@ class SpecialFollowlist extends ChangesListSpecialPage {
 	public function doMainQuery( $conds, $opts ) {
 
 		//$this->doWatchListQuery( $conds, $opts );
-		return $this->doFollowListQuery( $conds, $opts );
+		return $this->doUsersWatchListQuery( $conds, $opts );
 	}
-	
-	public function doFollowListQuery($conds, $opts) {
+
+	public function doUsersWatchListQuery($conds, $opts) {
 		$dbr = $this->getDB();
 		$user = $this->getUser();
 
-		# Toggle followlist content (all recent edits or just the latest)
+		# Toggle userswatchlist content (all recent edits or just the latest)
 		if ( $opts['extended'] ) {
 			$limitWatchlist = $user->getIntOption( 'wllimit' );
 			$usePage = false;
@@ -222,11 +222,11 @@ class SpecialFollowlist extends ChangesListSpecialPage {
 			$usePage = true;
 		}
 
-		$tables = array( 'recentchanges', 'followlist' );
+		$tables = array( 'recentchanges', 'userswatchlist' );
 		$fields = RecentChange::selectFields();
 		$query_options = array( 'ORDER BY' => 'rc_timestamp DESC' );
 		$join_conds = array(
-			'followlist' => array(
+			'userswatchlist' => array(
 				'INNER JOIN',
 				array(
 					'fl_user' => $user->getId(),
@@ -286,7 +286,7 @@ class SpecialFollowlist extends ChangesListSpecialPage {
 			$query_options,
 			$join_conds
 		);
-		
+
 	}
 
 	/**
@@ -295,7 +295,7 @@ class SpecialFollowlist extends ChangesListSpecialPage {
 	 * @return DatabaseBase
 	 */
 	protected function getDB() {
-		return wfGetDB( DB_SLAVE, 'followlist' );
+		return wfGetDB( DB_SLAVE, 'userswatchlist' );
 	}
 
 	/**
@@ -376,7 +376,7 @@ class SpecialFollowlist extends ChangesListSpecialPage {
 
 		$this->getOutput()->addSubtitle(
 			$this->msg( 'watchlistfor2', $user->getName() )
-				->rawParams( SpecialEditFollowList::buildTools( null ) )
+				->rawParams( SpecialEditUsersWatchList::buildTools( null ) )
 		);
 
 		$this->setTopText( $opts );

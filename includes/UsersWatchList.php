@@ -7,13 +7,13 @@
  * @author Pierre Boutet
  */
 
-class UserFollowList {
+class UsersWatchList {
 
 
 	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater ) {
 
 		var_dump('onLoadExtensionSchemaUpdates');
-		$updater->addExtensionTable( 'followlist',
+		$updater->addExtensionTable( 'userswatchlist',
 				__DIR__ . '/tables.sql' );
 		return true;
 	}
@@ -24,14 +24,14 @@ class UserFollowList {
 	 */
 	static function getPreferences( $user,  &$defaultPreferences ) {
 
-		global $wgUserFollowListAllowAll;
+		global $wgUsersWatchListAllowAll;
 
-		if( ! $wgUserFollowListAllowAll) {
+		if( ! $wgUsersWatchListAllowAll) {
 
-			$defaultPreferences['followlist-allow'] = array(
+			$defaultPreferences['userswatchlist-allow'] = array(
 					'type' => 'toggle',
-					'section' => 'watchlist/userwatchlist',
-					'label-message' => 'tog-followlist-allow',
+					'section' => 'watchlist/userswatchlist',
+					'label-message' => 'tog-userswatchlist-allow',
 			);
 		}
 	}

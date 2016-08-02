@@ -1,6 +1,6 @@
 {
-    "name": "wikifab/extensions-user-followlist",
-    "description": "This is a mediawiki extension to add the FollowList Special Page. This page enable to follow a list of users, and see all the changes they do.",
+    "name": "wikifab/extensions-user-watchlist",
+    "description": "This is a mediawiki extension to add the UsersWatchList Special Page. This page enable to watch a list of users, and see all the changes they do.",
     "type": "mediawiki-extension",
     "require": {
     }

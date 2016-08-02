@@ -1,5 +1,5 @@
 
-CREATE TABLE /*_*/followlist (
+CREATE TABLE /*_*/userswatchlist (
   -- Key to user.user_id
   fl_user int unsigned NOT NULL,
 
@@ -13,7 +13,7 @@ CREATE TABLE /*_*/followlist (
 
 ) /*$wgDBTableOptions*/;
 
-CREATE UNIQUE INDEX /*i*/fl_user ON /*_*/followlist (fl_user, fl_user_followed);
-CREATE INDEX /*i*/fl_notificationtimestamp ON /*_*/followlist (fl_user, fl_notificationtimestamp);
+CREATE UNIQUE INDEX /*i*/fl_user ON /*_*/userswatchlist (fl_user, fl_user_followed);
+CREATE INDEX /*i*/fl_notificationtimestamp ON /*_*/userswatchlist (fl_user, fl_notificationtimestamp);
 
 
