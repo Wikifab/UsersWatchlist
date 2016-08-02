@@ -8,7 +8,7 @@ Installation
 
 1. clone UsersWatchList into the 'extensions' directory of your mediawiki installation
 2. add the folling Line to your LocalSettings.php file :
-> require_once("$IP/extensions/UsersWatchList/UsersWatchList.php");
+> require_once("$IP/extensions/UsersWatchlist/UsersWatchList.php");
 3. run php maintenance/update.php 
 
 Usage

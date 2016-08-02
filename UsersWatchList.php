@@ -2,7 +2,7 @@
 
 
 $wgAutoloadClasses['UsersWatchList'] = __DIR__ . "/includes/UsersWatchList.php";
-$wgAutoloadClasses['SpecialUsersWatchlist'] = __DIR__ . "/includes/SpecialUsersWatchlist.php";
+$wgAutoloadClasses['SpecialUsersWatchlist'] = __DIR__ . "/includes/SpecialUsersWatchList.php";
 $wgAutoloadClasses['SpecialEditUsersWatchList'] = __DIR__ . "/includes/SpecialEditUsersWatchList.php";
 
 $wgHooks['LoadExtensionSchemaUpdates'][] = 'UsersWatchList::onLoadExtensionSchemaUpdates';
