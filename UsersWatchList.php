@@ -4,6 +4,8 @@
 $wgAutoloadClasses['UsersWatchList'] = __DIR__ . "/includes/UsersWatchList.php";
 $wgAutoloadClasses['SpecialUsersWatchlist'] = __DIR__ . "/includes/SpecialUsersWatchList.php";
 $wgAutoloadClasses['SpecialEditUsersWatchList'] = __DIR__ . "/includes/SpecialEditUsersWatchList.php";
+$wgAutoloadClasses['ApiUsersWatchList'] = __DIR__ . "/includes/ApiUsersWatchList.php";
+$wgAutoloadClasses['UsersWatchListCore'] = __DIR__ . "/includes/UsersWatchListCore.php";
 
 $wgHooks['LoadExtensionSchemaUpdates'][] = 'UsersWatchList::onLoadExtensionSchemaUpdates';
 $wgHooks['GetPreferences'][] = 'UsersWatchList::getPreferences';
@@ -24,6 +26,8 @@ $wgSpecialPages['EditUsersWatchList'] = 'SpecialEditUsersWatchList'; # Tell Medi
 
 //default permissions :
 $wgGroupPermissions['*']['editmyuserswatchlist'] = true;
+
+$wgAPIModules['userswatch'] = 'ApiUsersWatchList';
 
 
 // To hide opt-in in preference and allow all user to be watched :
