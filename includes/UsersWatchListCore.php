@@ -38,6 +38,56 @@ class UsersWatchListCore  {
 		return $users;
 	}
 
+	public function getUserCounters($user) {
+
+		$dbr = wfGetDB( DB_MASTER );
+
+		if ( !$user instanceof User ) {
+			$user = User::newFromName($user);
+		}
+		$following = 0;
+		$followers = 0;
+
+		// get following counters :
+		$res = $dbr->select(
+				'userswatchlist',
+				array(
+						'count' => 'count(*)'
+				), array(
+						'fl_user' => $user->getId(),
+				),
+				__METHOD__
+				);
+		if ( $res->numRows() > 0 ) {
+			foreach ( $res as $row ) {
+				$following = $row->count ;
+			}
+			$res->free();
+		}
+
+		// get followers counters :
+		$res = $dbr->select(
+				'userswatchlist',
+				array(
+						'count' => 'count(*)'
+				), array(
+						'fl_user_followed' => $user->getId(),
+				),
+				__METHOD__
+				);
+		if ( $res->numRows() > 0 ) {
+			foreach ( $res as $row ) {
+				$followers = $row->count;
+			}
+			$res->free();
+		}
+
+		return [
+				'following' => $following,
+				'followers' => $followers,
+		];
+	}
+
 	public function getUserIsFollowing($user, $userFollowed) {
 		static $followedUsers = [];
 
@@ -61,6 +111,40 @@ class UsersWatchListCore  {
 		}
 		return false;
 	}
+
+	/**
+	 * Get a list of titles of user watching the given user
+	 *
+	 * @return array
+	 */
+	public function getUsersFollowersInfo(User $user) {
+		$users = array();
+		$dbr = wfGetDB( DB_MASTER );
+
+		$res = $dbr->select(
+			array( 'userswatchlist', 'user' ),
+			array( 'fl_user', 'user_name', 'user_id' ),
+			array( 'fl_user_followed' => $user->getId() ),
+			__METHOD__,
+			array('ORDER BY' => array( 'user_name' )),
+			array(
+				 'user' => array( 'INNER JOIN', array(
+					'fl_user_followed=user_id'
+				 ) )
+			)
+		);
+
+		if ( $res->numRows() > 0 ) {
+			$users = array();
+			foreach ( $res as $row ) {
+				$users[] = User::newFromId( $row->fl_user );
+			}
+			$res->free();
+		}
+
+		return $users;
+	}
+
 	/**
 	 * Get a list of titles on a user's userswatchlist
 	 *
@@ -75,11 +159,11 @@ class UsersWatchListCore  {
 			array( 'fl_user_followed', 'user_name', 'user_id' ),
 			array( 'fl_user' => $user->getId() ),
 			__METHOD__,
+			array('ORDER BY' => array( 'user_name' )),
 			array(
-				 'user_properties' => array( 'INNER JOIN', array(
+				 'user' => array( 'INNER JOIN', array(
 					'fl_user_followed=user_id'
-				 ) ),
-				'ORDER BY' => array( 'user_name' )
+				 ) )
 			)
 		);
 
