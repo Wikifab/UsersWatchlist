@@ -12,7 +12,6 @@ class UsersWatchList {
 
 	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater ) {
 
-		var_dump('onLoadExtensionSchemaUpdates');
 		$updater->addExtensionTable( 'userswatchlist',
 				__DIR__ . '/tables.sql' );
 		return true;

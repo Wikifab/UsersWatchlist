@@ -7,6 +7,20 @@
  */
 class UsersWatchListCore  {
 
+
+	/**
+	 *	return an instance of UserWatchlistCore
+	 *
+	 * @return UsersWatchListCore
+	 */
+	public static function getInstance() {
+		static $instance = null;
+		if (!$instance) {
+			$instance = new UsersWatchListCore();
+		}
+		return $instance;
+	}
+
 	/**
 	 * Prepare a list of titles on a user's userswatchlist (excluding talk pages)
 	 * and return an array of (prefixed) strings
@@ -113,11 +127,48 @@ class UsersWatchListCore  {
 	}
 
 	/**
+	 * Get a list of ids of users watching the given user
+	 *
+	 * @param int $userId
+	 * @return int[]
+	 */
+	public function getFollowersIds($userId) {
+		$users = array();
+		$dbr = wfGetDB( DB_MASTER );
+
+		$res = $dbr->select(
+				array( 'userswatchlist', 'user' ),
+				array( 'fl_user', 'user_name', 'user_id' ),
+				array( 'fl_user_followed' => $userId ),
+				__METHOD__,
+				array('ORDER BY' => array( 'user_name' )),
+				array(
+						'user' => array( 'INNER JOIN', array(
+								'fl_user_followed=user_id'
+						) )
+				)
+		);
+
+		if ( $res->numRows() > 0 ) {
+			$users = array();
+			foreach ( $res as $row ) {
+				$users[] = $row->fl_user;
+			}
+			$res->free();
+		}
+
+		return $users;
+	}
+
+	/**
 	 * Get a list of titles of user watching the given user
 	 *
 	 * @return array
 	 */
 	public function getUsersFollowersInfo(User $user) {
+
+		//TODO : could be refactor to use $this->getFollowersIds()
+
 		$users = array();
 		$dbr = wfGetDB( DB_MASTER );
 
