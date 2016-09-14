@@ -281,6 +281,8 @@ class UsersWatchListCore  {
 					'fl_user_followed' => $userToWatch->getId()
 				);
 				$followedUsers[] = $inputUser;
+
+				Hooks::run( 'UsersWatchList-newFollower', [ $user, $userToWatch ] );
 			}
 		}
 
