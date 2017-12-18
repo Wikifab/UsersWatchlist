@@ -180,7 +180,7 @@ class SpecialUsersWatchList extends ChangesListSpecialPage {
 	 */
 	public function buildMainQueryConds( FormOptions $opts ) {
 		$dbr = $this->getDB();
-		$conds = parent::buildMainQueryConds( $opts );
+		$conds = $this->buildMainQueryConds128( $opts );
 
 		// Calculate cutoff
 		if ( $opts['days'] > 0 ) {
@@ -190,10 +190,98 @@ class SpecialUsersWatchList extends ChangesListSpecialPage {
 
 		return $conds;
 	}
+	/**
+	 * Return an array of conditions depending of options set in $opts
+	 *
+	 * this wa the methode ChangeListSpecialPAge::buildMainQueryConds in mediawiki 1.28
+	 *
+	 * @param FormOptions $opts
+	 * @return array
+	 */
+	public function buildMainQueryConds128( FormOptions $opts ) {
+		$dbr = $this->getDB();
+		$user = $this->getUser();
+		$conds = [];
 
-	public function doMainQuery( $conds, $opts ) {
+		// It makes no sense to hide both anons and logged-in users. When this occurs, try a guess on
+		// what the user meant and either show only bots or force anons to be shown.
+		$botsonly = false;
+		$hideanons = $opts['hideanons'];
+		if ( $opts['hideanons'] && $opts['hideliu'] ) {
+			if ( $opts['hidebots'] ) {
+				$hideanons = false;
+			} else {
+				$botsonly = true;
+			}
+		}
 
-		//$this->doWatchListQuery( $conds, $opts );
+		// Toggles
+		if ( $opts['hideminor'] ) {
+			$conds['rc_minor'] = 0;
+		}
+		if ( $opts['hidebots'] ) {
+			$conds['rc_bot'] = 0;
+		}
+		if ( $user->useRCPatrol() && $opts['hidepatrolled'] ) {
+			$conds['rc_patrolled'] = 0;
+		}
+		if ( $botsonly ) {
+			$conds['rc_bot'] = 1;
+		} else {
+			if ( $opts['hideliu'] ) {
+				$conds[] = 'rc_user = 0';
+			}
+			if ( $hideanons ) {
+				$conds[] = 'rc_user != 0';
+			}
+		}
+		if ( $opts['hidemyself'] ) {
+			if ( $user->getId() ) {
+				$conds[] = 'rc_user != ' . $dbr->addQuotes( $user->getId() );
+			} else {
+				$conds[] = 'rc_user_text != ' . $dbr->addQuotes( $user->getName() );
+			}
+		}
+		if ( $this->getConfig()->get( 'RCWatchCategoryMembership' )
+			&& $opts['hidecategorization'] === true
+		) {
+			$conds[] = 'rc_type != ' . $dbr->addQuotes( RC_CATEGORIZE );
+		}
+
+		// Namespace filtering
+		if ( $opts['namespace'] !== '' ) {
+			$selectedNS = $dbr->addQuotes( $opts['namespace'] );
+			$operator = $opts['invert'] ? '!=' : '=';
+			$boolean = $opts['invert'] ? 'AND' : 'OR';
+
+			// Namespace association (bug 2429)
+			if ( !$opts['associated'] ) {
+				$condition = "rc_namespace $operator $selectedNS";
+			} else {
+				// Also add the associated namespace
+				$associatedNS = $dbr->addQuotes(
+					MWNamespace::getAssociated( $opts['namespace'] )
+				);
+				$condition = "(rc_namespace $operator $selectedNS "
+					. $boolean
+					. " rc_namespace $operator $associatedNS)";
+			}
+
+			$conds[] = $condition;
+		}
+
+		return $conds;
+	}
+
+	/**
+	 * Get the database result for this special page instance. Used by ApiFeedRecentChanges.
+	 *
+	 * @return bool|ResultWrapper Result or false
+	 */
+	public function getRows() {
+		$opts = $this->getOptions();
+		$conds = $this->buildMainQueryConds( $opts );
+
 		return $this->doUsersWatchListQuery( $conds, $opts );
 	}
 
