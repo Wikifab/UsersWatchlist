@@ -1,0 +1,37 @@
+{
+    "@metadata": {
+        "authors": [
+            "Pierre Boutet"
+        ]
+    },
+	"userswatchlist": "Folgende Nutzer",
+	"userswatchlistanontext": "Bitte loggen Sie sich ein, um Artikel in Ihrer Beobachtungsliste anzuzeigen oder zu bearbeiten.",
+	"userswatchlisttools-view": "Änderungen der verfolgten Nutzer",
+	"userswatchlisttools-edit": "Ansehen und ändern der Liste der verfolgten Nutzer",
+	"userswatchlisttools-raw": "Ändern der Liste der verfolgten Nutzer im Raw-Modus",
+	"userswatchlisttools-clear": "Leeren der Liste verfolgten Nutzer",
+	"userswatchlistedit-normal-title": "Ändern der Liste verfolgten Nutzer",
+	"userswatchlistfor2": "Für $1 $2",
+	"userswatchlistedit-normal-legend": "Zurückziehen der Liste verfolgten Nutzer",
+	"userswatchlistedit-normal-explain": "Die Nutzer Ihrer Beobachtungsliste sind unten zu sehen.\nUm einen Benutzer aus der Liste zu entfernen, markieren Sie das Kontrollkästchen neben dem Benutzer und klicken dann auf die Schaltfläche « {{int:userswatchlistedit-normal-submit}} ».\nSie können auch [[Special:EditUsersWatchlist\/raw|die Liste im Raw-Modus ändern]].",
+	"userswatchlistedit-normal-submit": "Die ausgewählten Titel zurückziehen.",
+	"userswatchlistedit-raw-title": "Ändern der Beobachtungsliste im Raw-Modus.",
+	"userswatchlistedit-raw-legend": "Änderung der Beobachtungsliste im Raw-Modus.",
+	"userswatchlistedit-raw-explain": "Die Nutzer in Ihrer Beobachtungsliste werden unten angezeigt und können durch Hinzufügen oder Entfernen aus der Liste geändert werden (ein Nutzer pro Zeile).\nWenn Sie fertig sind, klicken Sie auf die Schaltfläche « {{int:userswatchlistedit-raw-submit}} » unten.\nSie können auch [[Special:EditUsersWatchlist|den normalen Editor benutzen.]].",
+	"userswatchlistedit-raw-titles": "Titel:",
+	"userswatchlistedit-raw-submit": "Die Liste der verfolgten Nutzer aktualisieren",
+	"userswatchlistedit-raw-done": "Ihre Liste der verfolgten Nutzer wurde aktualisiert.",
+	"userswatchlistedit-raw-added": "{{PLURAL:$1|Ein Nutzer wurde hinzugefügt|$1 Nutzer wurden hinzugefügt}}:",
+	"userswatchlistedit-raw-removed": "{{PLURAL:$1|Ein Nutzer wurde zurückgezogen|$1 Nutzer wurden zurückgezogen}}:",
+	"userswatchlistedit-raw-failed": "{{PLURAL:$1|Ein Nutzer konnte nicht hinzugefügt werden|$1 Nutzer konnten nicht hinzugefügt werden}}:",
+	"userswatchlistedit-clear-title": "Die Liste der verfolgten Nutzer wurde geleert.",
+	"userswatchlistedit-clear-legend": "Löschen der Liste der verfolgten Nutzer",
+	"userswatchlistedit-clear-explain": "Alle Nutzer wurden aus ihrer Beobachtungsliste gelöscht.",
+	"userswatchlistedit-clear-titles": "Titel:",
+	"userswatchlistedit-clear-submit": "Die Beobachtungsliste löschen (das ist dauerhaft!)",
+	"userswatchlistedit-clear-done": "Ihre Liste verfolgter Nutzer wurde gelöscht.",
+	"userswatchlistedit-clear-removed": "{{PLURAL:$1|Ein Nutzer wurde|$1 Nutzer wurden}} zurückgezogen:",
+	"userswatchlistedit-too-many": "Hier sind zu viele Seiten anzuzeigen.",
+	"prefs-userswatchlist": "Nachverfolgung durch den Nutzer",
+	"tog-userswatchlist-allow": "Anderen Nutzern erlauben, mich zu ihrer Beobachtungsliste hinzuzufügen."
+}

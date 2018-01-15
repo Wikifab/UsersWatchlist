@@ -1,0 +1,37 @@
+{
+    "@metadata": {
+        "authors": [
+            "Pierre Boutet"
+        ]
+    },
+	"userswatchlist": "Utenti seguiti ",
+	"userswatchlistanontext": "Connettiti per visualizzare o modificare gli elementi della tua lista dei seguiti. ",
+	"userswatchlisttools-view": "Modifiche degli utenti seguiti ",
+	"userswatchlisttools-edit": "Visualizzare e modificare la lista degli utenti seguiti ",
+	"userswatchlisttools-raw": "Modificare la lista degli utenti seguiti in modalità raw ",
+	"userswatchlisttools-clear": "Svuotare la lista degli utenti seguiti ",
+	"userswatchlistedit-normal-title": "Modificare la lista degli utenti seguiti ",
+	"userswatchlistfor2": "Per $1 $2",
+	"userswatchlistedit-normal-legend": "Rimozione degli utenti dall' elenco dei seguiti ",
+	"userswatchlistedit-normal-explain": "Gli utenti della tua lista dei seguiti sono mostrati qui sotto .\nPer rimuovere un utente dall'elenco, spuntare la casella accanto e fare clic sul pulsante \"{{int: userswatchlistedit-normal-submit}}}\".\nÈ inoltre possibile[[Special:EditUsersWatchlist\/raw|modificare l'elenco in modalità raw. ",
+	"userswatchlistedit-normal-submit": "Rimuovi i titoli selezionati",
+	"userswatchlistedit-raw-title": "Modifica della lista dei seguiti in modalità raw",
+	"userswatchlistedit-raw-legend": "Modifica della lista dei seguiti in modalità raw",
+	"userswatchlistedit-raw-explain": "Gli utenti nell'elenco seguiti sono visualizzati qui sotto e possono essere modificati aggiungendoli o rimuovendoli dall' elenco (un utente per riga) \nQuando hai finito, fai clic sul pulsante \"{{int: userswatchlistedit-raw-submit}}\" in basso.\nPuoi anche [[Special: EditUsersWatchlist | usare l'editor normale]].",
+	"userswatchlistedit-raw-titles": "Titoli: ",
+	"userswatchlistedit-raw-submit": "Aggiornare la lista degli utenti seguiti ",
+	"userswatchlistedit-raw-done": "la lista degli utenti seguiti è stata aggiornata. ",
+	"userswatchlistedit-raw-added": "{{{PLURAL: $1|Un utente è stato aggiunto |$1 utenti sono stati aggiunti}}}:",
+	"userswatchlistedit-raw-removed": "{{PLURAL:$1|Un utente è stato rimosso|$1 gli utenti sono stati rimossi}}}:",
+	"userswatchlistedit-raw-failed": "{{{PLURAL: $1|Un utente non può essere aggiunto |$1 utenti non possono essere aggiunti }}}:",
+	"userswatchlistedit-clear-title": "Lista utenti seguiti vuota ",
+	"userswatchlistedit-clear-legend": "Cancellare la lista degli utenti seguiti ",
+	"userswatchlistedit-clear-explain": "Tutti gli utenti saranno eliminati dalla lista dei seguiti ",
+	"userswatchlistedit-clear-titles": "Titoli: ",
+	"userswatchlistedit-clear-submit": "Cancellare la lista degli utenti seguiti (ciò è permanente!)",
+	"userswatchlistedit-clear-done": "L' elenco degli utenti seguiti è stato eliminato.",
+	"userswatchlistedit-clear-removed": "{{{{{PLURAL: $1}Un utente è stato|$1 utenti sono stati}} rimossi:",
+	"userswatchlistedit-too-many": "Ci sono troppe pagine da visualizzare qui.",
+	"prefs-userswatchlist": "Seguito dall'utente ",
+	"tog-userswatchlist-allow": "Consenti ad altri utenti di aggiungermi alla loro lista di monitoraggio"
+}
