@@ -1,0 +1,37 @@
+{
+    "@metadata": {
+        "authors": [
+            "Pierre Boutet"
+        ]
+    },
+	"userswatchlist": "Utilizadores seguidos ",
+	"userswatchlistanontext": "Por favor, proceda ao login para visualizar ou alterar os elementos da sua lista de seguimento. ",
+	"userswatchlisttools-view": "Alterações nos utilizadores seguidos",
+	"userswatchlisttools-edit": "Visualizar e alterar a lista dos utilizadores seguidos ",
+	"userswatchlisttools-raw": "Alterar a lista dos utilizadores seguidos em modo simples",
+	"userswatchlisttools-clear": "Limpar a lista dos utilizadores seguidos",
+	"userswatchlistedit-normal-title": "Alterar a lista dos utilizadores seguidos ",
+	"userswatchlistfor2": "Por $1 $2",
+	"userswatchlistedit-normal-legend": "Remover utilizadores da lista de seguimento ",
+	"userswatchlistedit-normal-explain": "Os utilizadores da sua lista de seguimento são visíveis abaixo.\nPara remover um utilizador da lista, assinale a caixa ao lado e, depois, clique no botão « {{int:userswatchlistedit-normal-submit}} ».\nPode também [[Special:EditUsersWatchlist\/raw|alterar a lista em modo simples]].",
+	"userswatchlistedit-normal-submit": "Remover os títulos selecionados ",
+	"userswatchlistedit-raw-title": "Alterar a lista de seguimento em modo simples ",
+	"userswatchlistedit-raw-legend": "Alteração da lista de seguimento em modo simples ",
+	"userswatchlistedit-raw-explain": "Os utilizadores da sua lista de seguimento são apresentados abaixo e podem ser alterados pela sua adição ou remoção da lista (um utilizador por linha). \nQuando terminar, clique no botão {{int:userswatchlistedit-raw-submit}} » em baixo. \nPode também [[Special:EditUsersWatchlist|utilizar o editor normal]].",
+	"userswatchlistedit-raw-titles": "Títulos",
+	"userswatchlistedit-raw-submit": "Atualize a lista dos utilizadores seguidos ",
+	"userswatchlistedit-raw-done": "A sua lista de utilizadores seguidos foi atualizada ",
+	"userswatchlistedit-raw-added": "{{PLURAL:$1|Um utilizador foi adicionado|$1 utilizadores foram adicionados}} :",
+	"userswatchlistedit-raw-removed": "{{PLURAL:$1|Um utilizador foi removido|$1 utilizadores foram removidos}} :",
+	"userswatchlistedit-raw-failed": "{{PLURAL:$1|Um utilizador não pode ser adicionado|$1 utilizadores não podem ser adicionados}} :",
+	"userswatchlistedit-clear-title": "A lista de utilizadores seguidos foi esvaziada ",
+	"userswatchlistedit-clear-legend": "Limpar a lista de utilizadores seguidos ",
+	"userswatchlistedit-clear-explain": "Todos os utilizadores serão removidos da sua lista de seguimento ",
+	"userswatchlistedit-clear-titles": "Títulos",
+	"userswatchlistedit-clear-submit": "Limpar a lista de seguimento (esta ação é permanente!)",
+	"userswatchlistedit-clear-done": "A sua lista de utilizadores foi limpa. ",
+	"userswatchlistedit-clear-removed": "{{PLURAL:$1|Um utilizador foi|$1 utilizadores foram}} removido(s) :",
+	"userswatchlistedit-too-many": "As páginas a apresentar aqui são demasiadas. ",
+	"prefs-userswatchlist": "Seguido pelo utilizador ",
+	"tog-userswatchlist-allow": "Autorizo os outros utilizadores a adicionarem-me à sua lista de seguimento "
+}
