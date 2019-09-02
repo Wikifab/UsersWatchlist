@@ -32,6 +32,7 @@
 	"userswatchlistedit-clear-done": "Your users watchlist has been cleared.",
 	"userswatchlistedit-clear-removed": "{{PLURAL:$1|1 user was|$1 users were}} removed:",
 	"userswatchlistedit-too-many": "There are too many pages to display here.",
+	"userswatchlist-showlast": "Show last $1 hours $2 days",
 	"prefs-userswatchlist": "watchlist per users",
 	"tog-userswatchlist-allow": "Allow other users to add me to their users watchlist"
 }

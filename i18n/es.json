@@ -32,6 +32,7 @@
 	"userswatchlistedit-clear-done": "Su lista de usuarios seguidos ha sido eliminada.",
 	"userswatchlistedit-clear-removed": "{{PLURAL:$1|Un usuario ha sido|$1 usuarios han sido}} retirados :",
 	"userswatchlistedit-too-many": "Aquí hay demasiadas páginas para mostrar.",
+	"userswatchlist-showlast": "Ver los cambios de las últimas $1 horas, $2 días",
 	"prefs-userswatchlist": "Seguido por usuario",
 	"tog-userswatchlist-allow": "Permitir que otros me agreguen a su lista de seguimiento"
 }

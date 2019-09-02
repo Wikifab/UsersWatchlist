@@ -32,6 +32,7 @@
 	"userswatchlistedit-clear-done": "Ihre Liste verfolgter Nutzer wurde gelöscht.",
 	"userswatchlistedit-clear-removed": "{{PLURAL:$1|Ein Nutzer wurde|$1 Nutzer wurden}} zurückgezogen:",
 	"userswatchlistedit-too-many": "Hier sind zu viele Seiten anzuzeigen.",
+	"userswatchlist-showlast": "Zeige die Änderungen der letzten $1 Stunden, $2 Tage.",
 	"prefs-userswatchlist": "Nachverfolgung durch den Nutzer",
 	"tog-userswatchlist-allow": "Anderen Nutzern erlauben, mich zu ihrer Beobachtungsliste hinzuzufügen."
 }

@@ -32,6 +32,7 @@
 	"userswatchlistedit-clear-done": "A sua lista de utilizadores foi limpa. ",
 	"userswatchlistedit-clear-removed": "{{PLURAL:$1|Um utilizador foi|$1 utilizadores foram}} removido(s) :",
 	"userswatchlistedit-too-many": "As páginas a apresentar aqui são demasiadas. ",
+	"userswatchlist-showlast": "Ver últimas $1 horas $2 dias",
 	"prefs-userswatchlist": "Seguido pelo utilizador ",
 	"tog-userswatchlist-allow": "Autorizo os outros utilizadores a adicionarem-me à sua lista de seguimento "
 }

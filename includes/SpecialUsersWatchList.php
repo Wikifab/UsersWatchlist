@@ -656,7 +656,7 @@ class SpecialUsersWatchList extends ChangesListSpecialPage {
 			$days[$i++] = $this->daysLink( $d, $options );
 		}
 
-		return $this->msg( 'wlshowlast' )->rawParams(
+		return $this->msg( 'userswatchlist-showlast' )->rawParams(
 			$this->getLanguage()->pipeList( $hours ),
 			$this->getLanguage()->pipeList( $days ),
 			$this->daysLink( 0, $options ) )->parse();
