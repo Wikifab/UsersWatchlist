@@ -111,6 +111,9 @@ class UsersWatchListCore  {
 		if ( !$userFollowed instanceof User ) {
 			$userFollowed = User::newFromName($userFollowed);
 		}
+		if ( ! $userFollowed || ! $user) {
+			return false;
+		}
 
 		$userId = $user->getId();
 
