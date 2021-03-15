@@ -21,6 +21,8 @@
  * @ingroup SpecialPage
  */
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * A special page that lists last changes made to the wiki,
  * limited to user-defined list of titles.
@@ -69,7 +71,7 @@ class SpecialUsersWatchList extends ChangesListSpecialPage {
 			&& $request->getVal( 'reset' )
 			&& $request->wasPosted()
 		) {
-			$user->clearAllNotifications();
+			MediaWikiServices::getInstance()->getWatchlistNotificationManager()->clearAllUserNotifications( $user );
 			$output->redirect( $this->getPageTitle()->getFullURL( $opts->getChangedValues() ) );
 
 			return;
